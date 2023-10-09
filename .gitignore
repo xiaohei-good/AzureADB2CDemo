@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/WebApplication1/WebApplication1/obj
+/WebApplication1/WebApplication1/obj/Debug/net7.0/WebApplication1.assets.cache
+/WebApplication1/WebApplication1/obj/Debug/net7.0/WebApplication1.GeneratedMSBuildEditorConfig.editorconfig

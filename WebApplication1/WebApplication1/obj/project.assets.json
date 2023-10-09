@@ -3251,11 +3251,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SallySun\\Desktop\\azure AD B2C demo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\SallySun\\Desktop\\2023demo\\azure AD B2C demo\\AzureADB2CDemo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\SallySun\\Desktop\\azure AD B2C demo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\SallySun\\Desktop\\2023demo\\azure AD B2C demo\\AzureADB2CDemo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\SallySun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SallySun\\Desktop\\azure AD B2C demo\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\SallySun\\Desktop\\2023demo\\azure AD B2C demo\\AzureADB2CDemo\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\SallySun\\AppData\\Roaming\\NuGet\\NuGet.Config",

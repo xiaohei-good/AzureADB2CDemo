@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F5fFZ10TEqAnO8r36svvPBRTlefGvZDjwgEj43+GYesvNIguK46Y/7j684p/vh/obvCYmw4ntZgr6D/TkKIgUA==",
+  "dgSpecHash": "6w8af3h5RDZw96iB41VbVBEJnXVag+WyhTshMaQIF3pQ8481tDX4JaWiv3oZUe3drMcX6KRfX5frOyq8EyGuPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SallySun\\Desktop\\azure AD B2C demo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\SallySun\\Desktop\\2023demo\\azure AD B2C demo\\AzureADB2CDemo\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SallySun\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\SallySun\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
