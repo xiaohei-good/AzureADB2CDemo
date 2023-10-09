@@ -1,0 +1,92 @@
+microsoft acctount sso
+1.program.cs
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"/dataprotection"))
+    .SetApplicationName("SharedCookieApp");
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = ".AspNet.SharedCookie";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/login";
+    });
+
+
+builder.Services.AddAuthentication()
+    .AddMicrosoftAccount(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"]!;
+        options.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"]!;
+    });
+
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
+
+app.UseAuthentication();
+app.UseAuthorization();
+2. Controller
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Identity.Models;
+using Identity.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using Microsoft.AspNetCore.Mvc;
+
+
+namespace Identity.Controllers
+{
+    [ApiController]
+    [Route("[controller]/[action]")]
+    public class AccountController : Controller
+    {
+        private readonly ITokenGenerationService _tokenGenerationService;
+
+        public AccountController(ITokenGenerationService tokenGenerationService)
+        {
+            _tokenGenerationService = tokenGenerationService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Authenticate(string redirectUrl)
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+               Response.Redirect(redirectUrl);
+            }
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action(nameof(AuthenticateCallback), new { redirectUrl = redirectUrl }),
+                Items = {
+                    {"returnUrl", redirectUrl}
+                },
+            };
+
+            return await Task.Run(() => Challenge(properties, MicrosoftAccountDefaults.AuthenticationScheme));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AuthenticateCallback(string redirectUrl)
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(MicrosoftAccountDefaults.AuthenticationScheme);
+
+            if (!authenticateResult.Succeeded)
+            {
+                return Unauthorized();
+            }
+
+            var user = HttpContext.User;
+            var jwtToken = _tokenGenerationService.GenerateToken(user!.FindFirstValue(ClaimTypes.Email)!, user.FindFirstValue(ClaimTypes.GivenName)!, user.FindFirstValue(ClaimTypes.Surname)!, "Administrator");
+            return Redirect($"{redirectUrl}?token={jwtToken}");
+        }
+
+    }
+}
